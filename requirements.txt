@@ -1,0 +1,7 @@
+polars
+numpy
+matplotlib
+seaborn
+scikit-learn
+spacy
+streamlit
