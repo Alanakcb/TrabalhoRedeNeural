@@ -73,9 +73,12 @@ def extract_features(text):
     }
 
 def build_pipeline():
+    # Garantir que a pasta de dados exista
+    os.makedirs("data", exist_ok=True)
+    
     # Caminhos de entrada e saída
-    input_file = "cefr_leveled_texts.csv"
-    output_file = "dataset_processado_pmc.csv"
+    input_file = "data/cefr_leveled_texts.csv"
+    output_file = "data/dataset_processado_pmc.csv"
     
     print(f"[{'NLP Pipeline'}] Iniciando pipeline de extração de características...")
     

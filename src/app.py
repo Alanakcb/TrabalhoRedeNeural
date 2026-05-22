@@ -274,7 +274,7 @@ def carregar_spacy():
 
 @st.cache_resource(show_spinner=False)
 def treinar_modelo():
-    arquivo = "dataset_processado_pmc.csv"
+    arquivo = "data/dataset_processado_pmc.csv"
     if not os.path.exists(arquivo):
         return None, None
     df = pl.read_csv(arquivo)
@@ -282,7 +282,7 @@ def treinar_modelo():
     y  = np.argmax(df.select(["out_iniciante","out_intermediario","out_avancado"]).to_numpy(), axis=1)
     sc = StandardScaler()
     Xs = sc.fit_transform(X)
-    mlp = MLPClassifier(hidden_layer_sizes=(15,), activation="relu", solver="adam",
+    mlp = MLPClassifier(hidden_layer_sizes=(150, 150, 150), activation="relu", solver="adam",
                         batch_size=32, max_iter=1000, early_stopping=True, random_state=42)
     mlp.fit(Xs, y)
     return mlp, sc
@@ -444,7 +444,7 @@ Our AI analyzes your grammar, vocabulary &amp; sentence complexity.
 <div class="landing-stats">
 <div class="l-stat"><div class="icon">❓</div><div class="val">3</div><div class="lbl">Questions</div></div>
 <div class="l-stat"><div class="icon">⚡</div><div class="val">&lt;5s</div><div class="lbl">AI Analysis</div></div>
-<div class="l-stat"><div class="icon">🎯</div><div class="val">85%</div><div class="lbl">Accuracy</div></div>
+<div class="l-stat"><div class="icon">🎯</div><div class="val">88%</div><div class="lbl">Accuracy</div></div>
 </div>
 </div>
 """

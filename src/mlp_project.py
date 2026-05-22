@@ -176,13 +176,16 @@ class MLP:
 # 4. EXPERIMENTAÇÃO E VALIDAÇÃO
 # ==========================================
 def run_experiments():
+    # Garantir que a pasta de graficos exista
+    os.makedirs("graficos", exist_ok=True)
+    
     # 1. Carregar e preparar os dados reais
-    if not os.path.exists("dataset_processado_pmc.csv"):
-        print("Erro: O arquivo 'dataset_processado_pmc.csv' não foi encontrado.")
+    if not os.path.exists("data/dataset_processado_pmc.csv"):
+        print("Erro: O arquivo 'data/dataset_processado_pmc.csv' não foi encontrado.")
         print("Execute o script 'nlp_pipeline.py' primeiro para gerar o dataset.")
         return
         
-    df = pl.read_csv("dataset_processado_pmc.csv")
+    df = pl.read_csv("data/dataset_processado_pmc.csv")
     X_train, X_test, y_train, y_test = preprocess_data(df)
     
     topologies = [5, 10, 15]
@@ -242,8 +245,8 @@ def run_experiments():
         
     # Salvando Gráfico de Curvas de Aprendizado
     plt.tight_layout()
-    plt.savefig('grafico_eqm_epocas.png', dpi=300)
-    print("\n[!] Gráfico de curvas de aprendizado salvo como 'grafico_eqm_epocas.png'")
+    plt.savefig('graficos/grafico_eqm_epocas.png', dpi=300)
+    print("\n[!] Gráfico de curvas de aprendizado salvo como 'graficos/grafico_eqm_epocas.png'")
     
     # Fechando figura para não travar a execução
     plt.close()
@@ -270,7 +273,7 @@ def run_experiments():
         plt.xlabel('Classe Predita')
         plt.ylabel('Classe Real')
         plt.tight_layout()
-        filename = f'matriz_confusao_{hidden_nodes}_neuronios.png'
+        filename = f'graficos/matriz_confusao_{hidden_nodes}_neuronios.png'
         plt.savefig(filename, dpi=300)
         plt.close()
         print(f"   [Gráfico salvo: {filename}]")

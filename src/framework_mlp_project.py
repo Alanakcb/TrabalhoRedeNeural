@@ -9,13 +9,16 @@ from sklearn.neural_network import MLPClassifier
 import os
 
 def run_framework_experiments():
+    # Garantir que a pasta de graficos exista
+    os.makedirs("graficos", exist_ok=True)
+    
     # 1. Carregamento dos Dados
-    if not os.path.exists("dataset_processado_pmc.csv"):
-        print("Erro: O arquivo 'dataset_processado_pmc.csv' não foi encontrado.")
+    if not os.path.exists("data/dataset_processado_pmc.csv"):
+        print("Erro: O arquivo 'data/dataset_processado_pmc.csv' não foi encontrado.")
         print("Execute o script de NLP primeiro.")
         return
 
-    df = pl.read_csv("dataset_processado_pmc.csv")
+    df = pl.read_csv("data/dataset_processado_pmc.csv")
     
     # Separando Features (X) e Target (y)
     X = df.select(["palavras", "tamanho_frase", "verbos_irregulares", "vocabulario_basico"]).to_numpy()
@@ -37,7 +40,7 @@ def run_framework_experiments():
     # Uma tupla representa as camadas ocultas. 
     # Ex: (15,) -> Uma camada com 15 neurônios.
     # Ex: (10, 5) -> Duas camadas ocultas, a primeira com 10 e a segunda com 5 neurônios.
-    topologies = [(5,), (10,), (15,)]
+    topologies = [(150, 150, 150), (200, 200, 200), (250, 250, 250)]
     
     results = {}
     fig, axes = plt.subplots(1, len(topologies), figsize=(18, 5))
@@ -98,12 +101,12 @@ def run_framework_experiments():
         plt.xlabel('Classe Predita')
         plt.ylabel('Classe Real')
         plt.tight_layout()
-        plt.savefig(f'matriz_framework_{topology[0]}.png', dpi=300)
+        plt.savefig(f'graficos/matriz_framework_{len(topology)}x_{topology[0]}.png', dpi=300)
         plt.close()
 
     # Salva o gráfico das curvas de aprendizagem
     fig.tight_layout()
-    fig.savefig('curva_loss_framework.png', dpi=300)
+    fig.savefig('graficos/curva_loss_3x_150_200_250_framework.png', dpi=300)
     plt.close()
 
     print("[!] Gráficos de erro e matrizes de confusão gerados com sucesso no diretório.")
