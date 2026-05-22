@@ -15,10 +15,6 @@ TrabalhoRedeNeural/
 ├── data/                      # Datasets e dados processados
 │   ├── cefr_leveled_texts.csv # Dataset original com textos e labels CEFR
 │   └── dataset_processado_pmc.csv # Dataset processado com features e One-Hot Encoding
-├── documentos/                # Roteiros de apresentação e relatórios
-│   ├── Apresentacao_Trabalho_Rede_Neural.pdf # Relatório técnico formatado
-│   ├── ROTEIRO_APRESENTACAO.md # Roteiro markdown de apoio à apresentação técnica
-│   └── ROTEIRO_APRESENTACAO.docx # Roteiro Word para entrega acadêmica
 ├── graficos/                  # Curvas de aprendizado (EQM/Loss) e matrizes de confusão
 │   ├── grafico_eqm_epocas.png
 │   ├── matriz_confusao_5_neuronios.png
